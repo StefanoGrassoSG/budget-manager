@@ -29,16 +29,16 @@
 
 .route-admin {
   header {
-    background-color: #404357;
-    -webkit-box-shadow: 0px 3px 6px 2px #000000; 
-    box-shadow: 0px 3px 6px 2px #000000;
+    background-color: white;
+    -webkit-box-shadow: 0px 3px 6px 2px lightgrey; 
+    box-shadow: 0px 3px 6px 2px lightgrey;
     margin-bottom: 5px;
     .none {
-      color: white;
+      color: black;
     }
 
     &:hover {
-      background-color: #1c133f!important;
+      background-color: lightgrey!important;
     }
   }
 }

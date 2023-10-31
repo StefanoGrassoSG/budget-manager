@@ -24,7 +24,7 @@ import axios from 'axios';
                 const token = response.data.authorisation.token;
                 console.log(token)
                 Cookies.set('token', token, { expires: 7 });
-                this.$router.push('/dashboard');
+                this.$router.push('/admin');
               }
             }).catch (err => {{
               if (err.response && err.response.data && err.response.data.errors) {

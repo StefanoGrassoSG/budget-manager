@@ -66,7 +66,7 @@ class AdminController extends Controller
         ->where('monthly__budgets.user_id', '=', $user['id'])
         ->get();
       
-        if($monthIncome != null) {
+        if($monthIncome) {
             return response()->json([
                 'code' => 200,
                 'success' => true,

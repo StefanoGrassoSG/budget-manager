@@ -4,6 +4,8 @@ import Cookies from 'js-cookie';
 import LoadingComponent from '../components/LoadingComponent.vue';
 import { store } from '../store.js';
 import StatComponent from '../components/StatComponent.vue';
+import TransactionsComponent from '../components/Transactions.component.vue';
+import MiniFooterComponent from '../components/MiniFooterComponent.vue';
 
    export default {
     data() {
@@ -16,7 +18,9 @@ import StatComponent from '../components/StatComponent.vue';
     },
     components: {
       LoadingComponent,
-      StatComponent
+      StatComponent,
+      TransactionsComponent,
+      MiniFooterComponent
     },
     methods: {
       checkToken() {
@@ -28,6 +32,7 @@ import StatComponent from '../components/StatComponent.vue';
             console.log(response);
             if(response.status === 200) {
               this.store.isAutenticathed = true
+              this.$router.push('/admin'); 
             }
             this.store.checkingToken = false
           })
@@ -36,6 +41,14 @@ import StatComponent from '../components/StatComponent.vue';
             this.$router.push('/login'); 
             this.store.checkingToken = false
           })
+      },
+      goToTransactions() {
+        this.store.TransactionsComponent = true
+        this.store.StatComponent = false
+      },
+      goToStats() {
+        this.store.TransactionsComponent = false
+        this.store.StatComponent = true
       }
   }};
 </script>
@@ -51,35 +64,37 @@ import StatComponent from '../components/StatComponent.vue';
                         </h3>
                         <ul>
                             <li>
-                                <router-link to="/admin">
-                                  <p class="messages-asidetext">
+                                <div class="fs-4 link" @click="goToStats()">
+                                  <span class="messages-asidetext">
                                        Statistiche
-                                  </p>
-                                </router-link>
+                                  </span>
+                                </div>
                             </li>
                             <li>
-                              <router-link to="/admin">
-                                  <p class="messages-asidetext">
-                                       Le Tue Transazioni
-                                  </p>
-                                </router-link>                         
+                              <div class="fs-4 link" @click="goToTransactions()">
+                                  <span class="messages-asidetext">
+                                      Transazioni
+                                  </span>
+                                </div>                         
                             </li>
                              <li> 
-                              <router-link to="/admin">
-                                  <p class="messages-asidetext">
-                                       Note Personali
-                                  </p>
-                                </router-link>
+                              <div class="fs-4 link">
+                                  <span class="messages-asidetext">
+                                       Note
+                                  </span>
+                                </div>
                             </li> 
                         </ul>
                     </div>
               </aside>
 
-              <div class="content" v-if="store.stat">
-                <StatComponent />
+              <div class="content">
+                <StatComponent  v-if="store.StatComponent == true"/>
+                <TransactionsComponent  v-if="store.TransactionsComponent == true"/>
               </div>
             </div>
         </main>
+        <MiniFooterComponent />
 </template>
 
 <style lang="scss" scoped>;
@@ -90,6 +105,7 @@ h1 {
 
 .content {
   padding: 20px;
+  min-height: calc(100vh - 168px);
 }
 
 main {
@@ -98,11 +114,12 @@ main {
 
 aside {
     background-color: black;
-    width: 20vw;
-    height: 100vh;
     position: relative;
     padding: 30px;
-    border-right: 1px solid black;
+    border-right: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+   
+    border-radius: 10px;
 
     .logo-aside {
         border-bottom: 4px solid #b8dff8;
@@ -134,8 +151,13 @@ aside {
                     text-decoration: none;
                 }
 
-                a:hover {
-                    color: #636567;
+                div {
+                  transition: all 0.2s ease-in-out;
+                }
+
+                div:hover {
+                    color: #99C691;
+                    cursor: pointer;
                 }
             }
         }

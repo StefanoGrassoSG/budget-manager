@@ -76,10 +76,8 @@ export default {
 <template>
     <div class="container-fluid">
         <div class="row gx-3 gy-3">
-                <div class="title-main">
-                    <h1>
-                        Le Statistiche delle tue transazioni
-                    </h1>
+                <div>
+                    <select name="" id=""></select>
                 </div>
                 <div class="col-3">
                     <div class="card-stats border rounded-4">
@@ -212,13 +210,13 @@ export default {
 }
 
 canvas {
-    height: 400px;
+    height: 320px;
 }
 .card-stats {
     padding: 20px;
     transition: all 0.3s ease-in-out;
     background-color: white;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
 
     .count-number-card {
         text-align: center;
@@ -235,7 +233,7 @@ canvas {
     .count-text-one {
         color: black;
         font-weight: bold;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         font-size: 1.7rem;
     }
 

@@ -15,5 +15,8 @@ export const store = reactive({
     expenseCalc: [],
     months: [],
     totalForMonth: [],
-    minLoad: false
+    minLoad: false,
+    StatComponent: true,
+    TransactionsComponent: false,
+    transactions: []
 })

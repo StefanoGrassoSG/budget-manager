@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CsrfTokenController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\api\AdminController;
+use App\Http\Controllers\api\TransactionController;
 
 
 /*
@@ -36,6 +37,7 @@ Route::group(['middleware' => ['api']], function () {
     Route::post('/user', [AuthController::class, 'me']);
     Route::post('/check', [AuthController::class, 'check']);
     Route::get('/stats', [AdminController::class, 'budget']);
+    Route::get('/index', [TransactionController::class, 'index']);
 });
 
 

@@ -35,7 +35,7 @@
 
 <template>
     <header class="z-3" v-show="store.checkingToken == false">
-        <div class="container py-4 d-flex justify-content-between align-items-center">
+        <div class="container py-3 d-flex justify-content-between align-items-center">
             <div class="title fw-bold">
                 <router-link class="text-decoration-none text-light ms-1 d-flex align-items-center" to="/">
                     <div class="logo me-2">

@@ -14,7 +14,7 @@ import axios from 'axios';
     },
     created() {
         if(store.isAutenticathed) {
-          this.$router.push('/dashboard')
+          this.$router.push('/admin')
         }
       },
     methods: {
