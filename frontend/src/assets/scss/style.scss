@@ -1,0 +1,45 @@
+
+@import "bootstrap/scss/bootstrap";
+
+* {
+    font-family: 'ADLaM Display', cursive;
+    font-family: 'Archivo Black', sans-serif;
+    font-family: 'Comfortaa', cursive;
+}
+
+
+/* Stile per la rotta "home" */
+.route-login {
+  background: #0F2027;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  
+  /* Stile per la rotta "about" */
+  .route-register {
+    background: #0F2027;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+    .form-container {
+      background-color: white!important;
+    }
+  }
+
+.route-admin {
+  header {
+    background-color: #404357;
+    -webkit-box-shadow: 0px 3px 6px 2px #000000; 
+    box-shadow: 0px 3px 6px 2px #000000;
+    margin-bottom: 5px;
+    .none {
+      color: white;
+    }
+
+    &:hover {
+      background-color: #1c133f!important;
+    }
+  }
+}
+  
