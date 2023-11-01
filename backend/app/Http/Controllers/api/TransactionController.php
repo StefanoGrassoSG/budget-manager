@@ -9,6 +9,7 @@ use App\Models\Monthly_Budget;
 use App\Models\Categories;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Methods;
 
 class TransactionController extends Controller
 {
@@ -16,8 +17,11 @@ class TransactionController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $transactions = Transactions::with('Expense_Categories', 'Payment_Methods')
+    {   
+        $meseCorrente = now()->format('m-Y');
+        $transactions = Transactions::with('Expense_Categories', 'paymentMethod')
+            ->join('monthly__budgets', 'transactions.monthly_budget_id', '=', 'monthly__budgets.id')
+            ->where('monthly__budgets.month_year', '=', $meseCorrente)
             ->paginate(10);
 
         if($transactions) {

@@ -57,7 +57,7 @@
 
             <nav v-else-if="store.isAutenticathed">
                 <ul class="list-unstyled d-flex m-0">
-                    <li v-if="$route.path !== '/dashboard' && $route.path !== '/admin'">
+                    <li v-if="$route.path !== '/dashboard' && $route.path !== '/admin' && $route.path !== '/admin/transactions'">
                       <router-link class="btn btn-dark me-5 p-2 px-3 fw-bolder" to="/admin">Go To Your Dashboard</router-link>
                     </li>
                     <li>

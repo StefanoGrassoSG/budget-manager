@@ -32,7 +32,6 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
             console.log(response);
             if(response.status === 200) {
               this.store.isAutenticathed = true
-            
             }
             this.store.checkingToken = false
           })
@@ -63,11 +62,11 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
                                 </router-link>
                             </li>
                             <li>
-                              <router-link to="/admin/transactions" class="fs-4 link hover">
+                                <router-link to="/admin/transactions" class="fs-4 link hover">
                                   <span class="messages-asidetext">
                                       Transazioni
                                   </span>
-                              </router-link>                         
+                                </router-link>                         
                             </li>
                              <li> 
                               <div class="fs-4 link">
@@ -81,7 +80,7 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
               </aside>
 
               <div class="content">
-                <StatComponent />
+                <TransactionsComponent />
               </div>
             </div>
         </main>

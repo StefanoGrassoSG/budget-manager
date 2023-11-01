@@ -13,6 +13,6 @@ class Categories extends Model
 
     public function Transaction() {
 
-        return $this->hasMany(Transactions::class);
+        return $this->hasMany(Transactions::class, 'category_id');
     }
 }

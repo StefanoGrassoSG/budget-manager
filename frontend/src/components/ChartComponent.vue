@@ -29,13 +29,22 @@ export default {
     }
   },
   created() {
-    const valoriArray = Object.values(this.store.expenseCalc);
-    const valoriPredefiniti = Array(10).fill(0);
-    valoriArray.forEach((valore, indice) => {
-    valoriPredefiniti[indice] = valore;
-    });
-    this.data.labels = this.store.categories.map(item => item.name);
+    const valoriArray = this.store.expenseCalc;
+    const valoriPredefiniti = Array(10);
+      for (let i = 0; i <= 9; i++) {
+        valoriPredefiniti[i - 1] = valoriArray[i] || 0;
+      }
+    const valoriArrayCategorie = this.store.categories;
+    const NuoviValoriCategorie = valoriArrayCategorie.map(obj => obj.name);
+    const ArrayFinale = Array(10);;
+      for (let index = 1; index < 11; index++) {
+        ArrayFinale[index] = NuoviValoriCategorie[index -  1];
+      }
     this.data.datasets[0].data = valoriPredefiniti;
+   
+    for (let index = 1; index < ArrayFinale.length; index++) {
+      this.data.labels.push(ArrayFinale[index])
+    }
   },
 };
 </script>

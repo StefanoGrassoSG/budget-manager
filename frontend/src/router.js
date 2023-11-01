@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage.vue';
 import RegisterPage from './pages/RegisterPage.vue';
 import LoginPage from './pages/LoginPage.vue';
 import DashboardPage from './pages/DashboardPage.vue';
+import TransactionsPage from './pages/TransactionsPage.vue';
 
 
 const router = createRouter({
@@ -22,6 +23,14 @@ const router = createRouter({
             name: 'admin',
             components: {
                 admin: DashboardPage
+            },
+            store
+        },
+        {
+            path: '/admin/transactions',
+            name: 'transactions',
+            components: {
+                admin: TransactionsPage
             },
             store
         },

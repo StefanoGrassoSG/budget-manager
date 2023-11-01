@@ -67,6 +67,9 @@ export default {
         if (month.month_year.includes('10')) {
             month.month_year = "Ottobre";
         }
+        if (month.month_year.includes('11')) {
+            month.month_year = "Novembre";
+        }
         });
       }
 
@@ -144,10 +147,10 @@ export default {
                             <div class="count-text-one">
                                 La spesa più grossa
                             </div>
-                            <div class="count-number-card" v-if="store.first.amount">
+                            <div class="count-number-card" v-if="store.first">
                                 {{ store.first.amount }} euro
                             </div>
-                            <div class="count-number-card" v-else-if="!store.first.amount && store.minLoad == false">
+                            <div class="count-number-card" v-else-if="!store.first && store.minLoad == false">
                                 0 spese
                             </div>
                             <div class="count-number-card" v-if="store.minLoad">
@@ -189,7 +192,7 @@ export default {
                                 <div class="chart-container" v-if="store.months.length > 0">
                                     <LineComponent />
                                 </div>
-                                <div class="count-number-card" v-else-if="store.months.length == 0 && store.minLoad == false">
+                                <div class="count-number-card" v-else-if="store.expenseCalc.length == 0 && store.minLoad == false">
                                      Non hai spese
                                 </div>
                                 <div class="chart-container" v-if="store.minLoad">

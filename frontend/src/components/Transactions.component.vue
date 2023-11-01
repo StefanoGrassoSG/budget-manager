@@ -57,11 +57,11 @@ export default {
                     <tbody>
                         <tr v-for="row in store.transactions.data">
                             <th scope="row">1</th>
-                            <td>2023-10-02</td>
-                            <td>Spesa alimentare</td>
-                            <td>32.11</td>
-                            <td>Visa</td>
-                            <td>Alimentazione</td>
+                            <td>{{ row.date }}</td>
+                            <td>{{ row.description }}</td>
+                            <td>{{ row.amount }}</td>
+                            <td>{{ row.payment_method.name }}</td>
+                            <td>{{ row.expense__categories.name }}</td>
                             <td>
                                 <button class="btn btn-primary">Dettagli</button>
                                 <button class="btn btn-warning">Modifica</button>

@@ -11,8 +11,8 @@ class Methods extends Model
 {
     use HasFactory;
 
-    public function Transaction() {
+    public function transactions() {
 
-        return $this->hasMany(Transactions::class);
+        return $this->hasMany(Transactions::class, 'methods_id');
     }
 }

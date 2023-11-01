@@ -20,11 +20,11 @@ class Transactions extends Model
 
     public function Expense_Categories() {
 
-        return $this->belongsTo(Categories::class);
+        return $this->belongsTo(Categories::class, 'category_id');
     }
 
-    public function Payment_Methods() {
+    public function  paymentMethod() {
 
-        return $this->belongsTo(Methods::class);
+        return $this->belongsTo(Methods::class, 'methods_id');
     }
 }

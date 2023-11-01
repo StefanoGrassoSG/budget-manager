@@ -2,7 +2,21 @@
 export default {
   data() {
     return {
-
+      currentTime: ''
+    }
+  },
+  created() {
+    this.updateCurrentTime();
+    setInterval(this.updateCurrentTime, 1000);
+  },
+  methods: {
+    updateCurrentTime() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const formattedHours = hours < 10 ? `0${hours}` : hours;
+      const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+      this.currentTime = `${formattedHours}:${formattedMinutes}`;
     }
   }
 }
@@ -15,7 +29,7 @@ export default {
                 Make by Stefano with Love
             </div>
             <div>
-                19:53
+                {{ currentTime }}
             </div>
         </div>
   </footer>
