@@ -1,5 +1,6 @@
 <script >
 import axios from 'axios';
+import MiniLoadingComponent from './MiniLoadingComponent.vue';
 import { store } from '../store.js';
 export default {
   data() {
@@ -7,17 +8,13 @@ export default {
         store
     }
   },
+  components: {
+    MiniLoadingComponent
+  },
   created() {
     this.getAll()
   },
-    watch: {
-        'this.store.TransactionsComponent': 'goToTransactions'
-        },
     methods: {
-        goToTransactions() {
-        this.store.TransactionsComponent = true
-        this.store.StatComponent = false
-        },
         getAll() {
             this.store.minLoad = true
             axios.get('http://localhost:8000/api/index', null)
@@ -36,16 +33,23 @@ export default {
 </script>
 
 <template>
-    <div class="container-fluid h-100 overflow-auto">
+    <MiniLoadingComponent v-if="store.minLoad" />
+    <div v-else class="container-fluid h-100 overflow-auto">
         <div class="row">
             <div class="col-12">
-                <div class="mb-2">
-                    <select name="" id=""></select>
+                <div class="mb-2 d-flex">
+                    <select class="form-select form-select-sm w-25" aria-label="Small select example">
+                        <option selected>Seleziona mese di riferimento</option>
+                        <option value="1">Novembre</option>
+                        <option value="2">Ottobre</option>
+                    </select>
+                    <div>
+                        <router-link  to="/admin/create" class="btn btn-success ms-3">Aggiungi+</router-link>
+                    </div>
                 </div>
-                <table class="table table-striped table-success fs-4 border border-5 border-white table-striped-columns table-bordered border-primary">
+                <table class="table table-striped table-white fs-4 border border-5 border-white table-striped-columns table-bordered border-primary">
                     <thead>
                         <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Data</th>
                         <th scope="col">Descrizione</th>
                         <th scope="col">Ammontare</th>
@@ -56,7 +60,6 @@ export default {
                     </thead>
                     <tbody>
                         <tr v-for="row in store.transactions.data">
-                            <th scope="row">1</th>
                             <td>{{ row.date }}</td>
                             <td>{{ row.description }}</td>
                             <td>{{ row.amount }}</td>
@@ -64,7 +67,7 @@ export default {
                             <td>{{ row.expense__categories.name }}</td>
                             <td>
                                 <button class="btn btn-primary">Dettagli</button>
-                                <button class="btn btn-warning">Modifica</button>
+                                <button class="btn btn-warning mx-2">Modifica</button>
                                 <button class="btn btn-danger">Elimina</button>
                             </td>
                         </tr>

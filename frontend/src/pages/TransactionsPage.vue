@@ -5,6 +5,7 @@ import LoadingComponent from '../components/LoadingComponent.vue';
 import { store } from '../store.js';
 import StatComponent from '../components/StatComponent.vue';
 import TransactionsComponent from '../components/Transactions.component.vue';
+import MiniLoadingComponent from '../components/MiniLoadingComponent.vue';
 import MiniFooterComponent from '../components/MiniFooterComponent.vue';
 
    export default {
@@ -20,7 +21,8 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
       LoadingComponent,
       StatComponent,
       TransactionsComponent,
-      MiniFooterComponent
+      MiniFooterComponent,
+      MiniLoadingComponent
     },
     methods: {
       checkToken() {
@@ -96,6 +98,7 @@ h1 {
 .content {
   padding: 20px;
   min-height: calc(100vh - 168px);
+  width: 100%;
 }
 
 main {

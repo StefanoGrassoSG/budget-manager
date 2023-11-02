@@ -14,9 +14,13 @@ export default {
       const now = new Date();
       const hours = now.getHours();
       const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+
       const formattedHours = hours < 10 ? `0${hours}` : hours;
       const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-      this.currentTime = `${formattedHours}:${formattedMinutes}`;
+      const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+      this.currentTime = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
     }
   }
 }

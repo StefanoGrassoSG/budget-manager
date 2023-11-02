@@ -38,6 +38,7 @@ Route::group(['middleware' => ['api']], function () {
     Route::post('/check', [AuthController::class, 'check']);
     Route::get('/stats', [AdminController::class, 'budget']);
     Route::get('/index', [TransactionController::class, 'index']);
+    Route::post('/store', [TransactionController::class, 'store']);
 });
 
 

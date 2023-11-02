@@ -30,7 +30,7 @@ export default {
         this.store.minLoad = true
         axios.get('http://localhost:8000/api/stats', null)
           .then(response => {
-            console.log(response.data, 'TEST')
+            console.log(response.data, 'GENERAL')
            this.store.stats = response.data.data.datas
            this.store.first = response.data.data.expense
            this.store.categories = response.data.data.categories
@@ -42,9 +42,10 @@ export default {
            this.convertDate()
            console.log(this.store.months)
            console.log(this.store.stats)
-           console.log(this.store.first)
+           console.log(this.store.first, 'piu alta')
            console.log(this.store.categories)
            console.log(this.store.total)
+           console.log( this.store.totalForMonth, 'TEST2')
            this.store.minLoad = false
           })
           .catch(err => {
@@ -80,7 +81,13 @@ export default {
     <div class="container-fluid">
         <div class="row gx-3 gy-3">
                 <div>
-                    <select name="" id=""></select>
+                    <select class="form-select form-select-sm w-25" aria-label="Small select example">
+                        <option selected>
+                            Seleziona mese di riferimento
+                        </option>
+                        <option value="1">Novembre</option>
+                        <option value="2">Ottobre</option>
+                    </select>
                 </div>
                 <div class="col-3">
                     <div class="card-stats border rounded-4">
@@ -157,7 +164,7 @@ export default {
                                     <MiniLoadingComponent />
                             </div>
                             <div class="count-text-two">
-                                Vestito
+                                {{ store.first.description }}
                             </div>
                         </a>
                     </div>

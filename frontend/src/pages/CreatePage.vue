@@ -5,7 +5,9 @@ import LoadingComponent from '../components/LoadingComponent.vue';
 import { store } from '../store.js';
 import StatComponent from '../components/StatComponent.vue';
 import TransactionsComponent from '../components/Transactions.component.vue';
+import MiniLoadingComponent from '../components/MiniLoadingComponent.vue';
 import MiniFooterComponent from '../components/MiniFooterComponent.vue';
+import CreateTransactionComponent from '../components/CreateTransactionComponent.vue';
 
    export default {
     data() {
@@ -20,7 +22,9 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
       LoadingComponent,
       StatComponent,
       TransactionsComponent,
-      MiniFooterComponent
+      MiniFooterComponent,
+      MiniLoadingComponent,
+      CreateTransactionComponent
     },
     methods: {
       checkToken() {
@@ -32,7 +36,6 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
             console.log(response);
             if(response.status === 200) {
               this.store.isAutenticathed = true
-            
             }
             this.store.checkingToken = false
           })
@@ -63,11 +66,11 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
                                 </router-link>
                             </li>
                             <li>
-                              <router-link to="/admin/transactions" class="fs-4 link hover">
+                                <router-link to="/admin/transactions" class="fs-4 link hover">
                                   <span class="messages-asidetext">
                                       Transazioni
                                   </span>
-                              </router-link>                         
+                                </router-link>                         
                             </li>
                              <li> 
                               <div class="fs-4 link">
@@ -81,7 +84,7 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
               </aside>
 
               <div class="content">
-                <StatComponent />
+                <CreateTransactionComponent />
               </div>
             </div>
         </main>

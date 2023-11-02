@@ -50,6 +50,7 @@ export default {
   created() {
     this.data.labels = this.store.months.map(item => item.month_year);
     this.data.datasets[0].data = this.store.totalForMonth.map(item => item.total_expenses);
+    console.log(this.data.datasets[0].data, 'TEST')
   }
 }
 </script>

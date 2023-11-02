@@ -27,7 +27,9 @@
     }
   }
 
-.route-admin {
+.route-admin,
+.route-transactions,
+.route-create {
   header {
     background-color: white;
     -webkit-box-shadow: 0px 3px 6px 2px lightgrey; 
@@ -43,19 +45,3 @@
   }
 }
 
-.route-transactions {
-  header {
-    background-color: white;
-    -webkit-box-shadow: 0px 3px 6px 2px lightgrey; 
-    box-shadow: 0px 3px 6px 2px lightgrey;
-    margin-bottom: 5px;
-    .none {
-      color: black!important;
-    }
-
-    &:hover {
-      background-color: lightgrey!important;
-    }
-  }
-}
-  

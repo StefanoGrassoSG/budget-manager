@@ -11,7 +11,7 @@ class StoreTransactionsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -22,7 +22,11 @@ class StoreTransactionsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'date' => 'required',
+            'description' => 'nullable',
+            'payment' => 'required',
+            'category' => 'required',
+            'price' => 'required'
         ];
     }
 }

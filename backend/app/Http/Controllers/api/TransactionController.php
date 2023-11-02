@@ -10,6 +10,7 @@ use App\Models\Categories;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Methods;
+use App\Http\Requests\StoreTransactionsRequest;
 
 class TransactionController extends Controller
 {
@@ -50,9 +51,21 @@ class TransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(StoreTransactionsRequest $request)
+    {   
+        $data = [
+            'date' => $request->input('date'),
+            'description' => $request->input('description'),
+            'payment' => $request->input('payment'),
+            'category' => $request->input('category'),
+            'price' => $request->input('price'),
+        ];
+    
+        return response()->json([
+            'code' => 200,
+            'success' => true,
+            'data' => $data
+        ]);
     }
 
     /**
