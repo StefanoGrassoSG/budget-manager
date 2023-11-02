@@ -18,7 +18,8 @@ class TransactionController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
+    {      
+        $user = Auth::user();
         $meseCorrente = now()->format('m-Y');
         $transactions = Transactions::with('Expense_Categories', 'paymentMethod')
             ->join('monthly__budgets', 'transactions.monthly_budget_id', '=', 'monthly__budgets.id')
@@ -53,6 +54,7 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionsRequest $request)
     {   
+        $userId = Auth::id();
         $data = [
             'date' => $request->input('date'),
             'description' => $request->input('description'),
@@ -60,6 +62,16 @@ class TransactionController extends Controller
             'category' => $request->input('category'),
             'price' => $request->input('price'),
         ];
+
+            
+         Transactions::create([
+            'date' => $data['date'],
+           'description' => $data['description'],
+           'amount' => $data['price'],
+           'methods_id' => $data['payment'],
+           'category_id' => $data['category'],
+           'user_id' => $userId,
+        ]);
     
         return response()->json([
             'code' => 200,

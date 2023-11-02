@@ -68,27 +68,27 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
                         <label for="inputState" class="form-label">Metodo di pagamento</label>
                         <select v-model="data.payment" id="inputState" class="form-select">
                             <option value="" selected disabled hidden>Scegli...</option>
-                            <option value="Discover Card">Discover Card</option>
-                            <option value="MasterCard">MasterCard</option>
-                            <option value="Contanti">Contanti</option>
-                            <option value="Bancomat">Bancomat</option>
-                            <option value="Visa">Visa</option>
+                            <option value="1">Discover Card</option>
+                            <option value="2">MasterCard</option>
+                            <option value="3">Contanti</option>
+                            <option value="4">Bancomat</option>
+                            <option value="5">Visa</option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label for="inputCat" class="form-label">Categoria</label>
                         <select v-model="data.category" id="inputCat" class="form-select">
                             <option value="" selected disabled hidden>Scegli...</option>
-                            <option value="Alloggio">Alloggio</option>
-                            <option value="Alimentazione">Alimentazione</option>
-                            <option value="Trasporti">Trasporti</option>
-                            <option value="Salute">Salute</option>
-                            <option value="Formazione">Formazione</option>
-                            <option value="Divertimento">Divertimento</option>
-                            <option value="Abbigliamento">Abbigliamento</option>
-                            <option value="Tecnologia">Tecnologia</option>
-                            <option value="Risparmio">Risparmio</option>
-                            <option value="Altro">Altro</option>
+                            <option value="1">Alloggio</option>
+                            <option value="2">Alimentazione</option>
+                            <option value="3">Trasporti</option>
+                            <option value="4">Salute</option>
+                            <option value="5">Formazione</option>
+                            <option value="6">Divertimento</option>
+                            <option value="7">Abbigliamento</option>
+                            <option value="8">Tecnologia</option>
+                            <option value="9">Risparmio</option>
+                            <option value="10">Altro</option>
                         </select>
                     </div>
                     <div class="col-md-2">
