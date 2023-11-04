@@ -74,18 +74,18 @@ import axios from 'axios';
             <div class="d-flex justify-content-between mt-4">
                 <div>
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label text-white ms-2" for="exampleCheck1">Remember <br> Me</label>
+                    <label class="form-check-label text-black ms-2" for="exampleCheck1">Remember <br> Me</label>
                 </div>
                 <div class="text-end">
-                    <router-link class="password text-decoration-none text-white fw-bold" to="/forgot">Forgot Password?</router-link>
+                    <router-link class="password text-decoration-none text-black fw-bold" to="/forgot">Forgot Password?</router-link>
                 </div>
             </div>
             <button type="submit"  class="btn btn-primary w-100 fw-bold py-3 mt-4">
                 SIGN IN
             </button>
-            <p class="text-white text-center w-100 mt-5">
+            <p class="text-black text-center w-100 mt-5">
                 New User?
-                <router-link class="text-decoration-none text-white ms-1" to="/register">SIGN UP</router-link>
+                <router-link class="text-decoration-none text-success ms-1" to="/register">SIGN UP</router-link>
             </p>
         </form>
     </div> 

@@ -45,14 +45,14 @@ import axios from 'axios';
        <div class="container-fluid d-flex">
           <div class="aside position-relative">
             <div class="position-absolute top-50 start-50 translate-middle text-center p-2">
-              <hr class="text-white">
-              <p class="fw-bold fs-2 text-white">
+              <hr class="text-dark">
+              <p class="fw-bold fs-2 text-dark">
                 "Log in to track your income and expenses, plan your budget, and efficiently work toward your financial goals. Your financial control begins here."
               </p>
-              <hr class="text-white">
+              <hr class="text-dark">
             </div>
           </div>
-          <div class="form-container p-5 shadow mt-5  container-sm bg-transparent border border-2 border-dark rounded d-flex flex-column align-items-center justify-content-center">
+          <div class="form-container p-5 shadow mt-5  container-sm bg-transparent d-flex flex-column align-items-center justify-content-center">
               <form class="w-100" @submit.prevent="sendData">
                   <div class="form-floating mb-3 w-100">
                       <input v-model="formData.name" type="text" name="name" class="form-control" id="name" placeholder="First name">

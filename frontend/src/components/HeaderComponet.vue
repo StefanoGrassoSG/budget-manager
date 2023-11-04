@@ -37,7 +37,7 @@
     <header class="z-3" v-show="store.checkingToken == false">
         <div class="container py-3 d-flex justify-content-between align-items-center">
             <div class="title fw-bold">
-                <router-link class="text-decoration-none text-light ms-1 d-flex align-items-center" to="/">
+                <router-link class="text-decoration-none text-dark ms-1 d-flex align-items-center" to="/">
                     <div class="logo me-2">
                         <img class="img-fluid" src="../../public/logo_transparent.png" alt="">
                     </div>
@@ -47,10 +47,10 @@
             <nav v-if="store.isAutenticathed == false">
                 <ul class="d-flex list-unstyled m-0">
                     <li>
-                        <router-link class="btn btn-light fw-bolder" to="/login">SIGN IN</router-link>
+                        <router-link class="btn btn-dark fw-bolder" to="/login">SIGN IN</router-link>
                     </li>
                     <li>
-                        <router-link class="btn btn-outline-light fw-bolder ms-4" to="/register">REGISTER</router-link>
+                        <router-link class="btn btn-outline-dark fw-bolder ms-4" to="/register">REGISTER</router-link>
                     </li>
                 </ul>
             </nav>
