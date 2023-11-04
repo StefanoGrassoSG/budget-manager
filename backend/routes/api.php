@@ -39,6 +39,7 @@ Route::group(['middleware' => ['api']], function () {
     Route::get('/stats', [AdminController::class, 'budget']);
     Route::get('/index', [TransactionController::class, 'index']);
     Route::post('/store', [TransactionController::class, 'store']);
+    Route::post('/destroy/{transaction}', [TransactionController::class, 'destroy']);
 });
 
 

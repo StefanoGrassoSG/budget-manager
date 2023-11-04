@@ -19,7 +19,8 @@ class Transactions extends Model
         'amount',
         'methods_id',
         'category_id',
-        'user_id'
+        'user_id',
+        'monthly_budget_id'
     ];
 
     public function user() {

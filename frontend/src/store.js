@@ -18,5 +18,6 @@ export const store = reactive({
     minLoad: false,
     StatComponent: true,
     TransactionsComponent: false,
-    transactions: []
+    transactions: [],
+    errorsCreate: {}
 })

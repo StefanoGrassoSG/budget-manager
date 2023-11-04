@@ -24,6 +24,7 @@ class TransactionController extends Controller
         $transactions = Transactions::with('Expense_Categories', 'paymentMethod')
             ->join('monthly__budgets', 'transactions.monthly_budget_id', '=', 'monthly__budgets.id')
             ->where('monthly__budgets.month_year', '=', $meseCorrente)
+            ->select('transactions.*')
             ->paginate(10);
 
         if($transactions) {
@@ -54,7 +55,13 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionsRequest $request)
     {   
+        $meseCorrente = now()->format('m-Y');
         $userId = Auth::id();
+        $currentBudgetId = DB::table('monthly__budgets')
+            ->where('month_year', '=', $meseCorrente)
+            ->where('user_id', '=', $userId)
+            ->first();
+
         $data = [
             'date' => $request->input('date'),
             'description' => $request->input('description'),
@@ -71,12 +78,14 @@ class TransactionController extends Controller
            'methods_id' => $data['payment'],
            'category_id' => $data['category'],
            'user_id' => $userId,
+           'monthly_budget_id' =>  $currentBudgetId->id
         ]);
     
         return response()->json([
             'code' => 200,
             'success' => true,
-            'data' => $data
+            'data' => $data,
+            'test' =>  $currentBudgetId
         ]);
     }
 
@@ -107,8 +116,11 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Transactions $transaction)
     {
-        //
+        $transaction->delete();
+        return response()->json([
+            'message' => 'Transazione eliminata con successo',
+        ]);
     }
 }

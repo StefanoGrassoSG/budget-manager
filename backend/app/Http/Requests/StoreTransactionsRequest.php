@@ -22,11 +22,11 @@ class StoreTransactionsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => 'required',
+            'date' => 'required|before_or_equal:today',
             'description' => 'nullable',
             'payment' => 'required',
             'category' => 'required',
-            'price' => 'required'
+            'price' => 'required|numeric|min:0.01|max:100000'
         ];
     }
 }
