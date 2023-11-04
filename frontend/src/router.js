@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage.vue';
 import DashboardPage from './pages/DashboardPage.vue';
 import TransactionsPage from './pages/TransactionsPage.vue';
 import CreatePage from './pages/CreatePage.vue'
+import ShowPage from './pages/ShowPage.vue'
 
 
 const router = createRouter({
@@ -32,6 +33,14 @@ const router = createRouter({
             name: 'transactions',
             components: {
                 admin: TransactionsPage
+            },
+            store
+        },
+        {
+            path: '/admin/show',
+            name: 'show',
+            components: {
+                admin: ShowPage
             },
             store
         },

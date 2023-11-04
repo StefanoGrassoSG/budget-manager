@@ -37,9 +37,12 @@ Route::group(['middleware' => ['api']], function () {
     Route::post('/user', [AuthController::class, 'me']);
     Route::post('/check', [AuthController::class, 'check']);
     Route::get('/stats', [AdminController::class, 'budget']);
+    Route::post('/old', [AdminController::class, 'oldBudget']);
     Route::get('/index', [TransactionController::class, 'index']);
+    Route::post('/indexOld', [TransactionController::class, 'indexOld']);
     Route::post('/store', [TransactionController::class, 'store']);
     Route::post('/destroy/{transaction}', [TransactionController::class, 'destroy']);
+    Route::post('/show/{transaction}', [TransactionController::class, 'show']);
 });
 
 

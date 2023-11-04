@@ -19,5 +19,8 @@ export const store = reactive({
     StatComponent: true,
     TransactionsComponent: false,
     transactions: [],
-    errorsCreate: {}
+    errorsCreate: {},
+    singleId: null,
+    single: {},
+    path: ''
 })

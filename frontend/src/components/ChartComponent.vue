@@ -31,7 +31,7 @@ export default {
   created() {
     const valoriArray = this.store.expenseCalc;
     const valoriPredefiniti = Array(10);
-      for (let i = 0; i <= 9; i++) {
+      for (let i = 0; i <= 10; i++) {
         valoriPredefiniti[i - 1] = valoriArray[i] || 0;
       }
     const valoriArrayCategorie = this.store.categories;
@@ -45,6 +45,9 @@ export default {
     for (let index = 1; index < ArrayFinale.length; index++) {
       this.data.labels.push(ArrayFinale[index])
     }
+
+    console.log(this.data.datasets[0].data, 'QUI')
+    console.log(this.data.labels, 'QUI2')
   },
 };
 </script>

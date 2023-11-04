@@ -8,6 +8,10 @@ export default {
         store,
         show:false,
         transactionToDeleteId: null,
+        data: {
+            month: ''
+        },
+
     }
   },
   components: {
@@ -21,10 +25,41 @@ export default {
             this.store.minLoad = true
             axios.get('http://localhost:8000/api/index', null)
             .then(res => {
-                console.log(res.data.data)
+                console.log(res.data, 'TRANZAZION LOG')
                 this.store.transactions = res.data.data
                 console.log(this.store.transactions)
+                this.store.months = res.data.months
                 this.store.minLoad = false
+                this.store.path = res.data.data.path
+                this.convertDate()
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        },
+        convertDate() {
+        let currentYear = new Date().getFullYear();
+        this.store.months.forEach(function(month) {
+        if (month.month_year.includes('10')) {
+            month.month_year = "Ottobre";
+        }
+        if (month.month_year.includes('11')) {
+            month.month_year = "Novembre";
+        }
+        });
+      },
+        getAllOld() {
+            this.store.minLoad = true
+            axios.post('http://localhost:8000/api/indexOld', this.data)
+            .then(res => {
+                this.store.months = res.data.months
+                console.log(res.data, 'OLD TRANSAC')
+                console.log(this.store.months)
+                this.store.transactions = res.data.data
+                console.log(this.store.transactions)
+                this.store.path = res.data.data.path
+                this.store.minLoad = false
+                this.convertDate()
             })
             .catch(err => {
                 console.log(err)
@@ -50,6 +85,80 @@ export default {
         },
         reset() {
             this.show = false
+        },
+        saveId(id) {
+            localStorage.setItem('singleId', id);
+        },
+        prevOld() {
+            this.store.minLoad = true
+            axios.post(this.store.transactions.prev_page_url)
+            .then(res => {
+                console.log(res.data, 'TRANZAZION LOG')
+                this.store.transactions = res.data.data
+                console.log(this.store.transactions)
+                this.store.months = res.data.months
+                this.store.minLoad = false
+                this.convertDate()
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        },
+        nextOld() {
+            this.store.minLoad = true
+            axios.post(this.store.transactions.next_page_url)
+            .then(res => {
+                console.log(res.data, 'TRANZAZION LOG')
+                this.store.transactions = res.data.data
+                console.log(this.store.transactions)
+                this.store.months = res.data.months
+                this.store.minLoad = false
+                this.convertDate()
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        },
+        getButtonLabel(label) {
+        if (label === "Next &raquo;") {
+            return 'Avanti';
+        } else if (label === "&laquo; Previous") {
+            return 'Indietro';
+        } else {
+            return label; // Altrimenti, mantiene il valore originale
+        }
+        },
+        changePage(url) {
+            if(this.store.path == "http://localhost:8000/api/index") {
+                this.store.minLoad = true
+                axios.get(url)
+                .then(res => {
+                    console.log(res.data, 'TRANZAZION LOG')
+                    this.store.transactions = res.data.data
+                    console.log(this.store.transactions)
+                    this.store.months = res.data.months
+                    this.store.minLoad = false
+                    this.convertDate()
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            }
+            if(this.store.path == "http://localhost:8000/api/indexOld") {
+                this.store.minLoad = true
+                axios.post(url)
+                .then(res => {
+                    console.log(res.data, 'TRANZAZION LOG')
+                    this.store.transactions = res.data.data
+                    console.log(this.store.transactions)
+                    this.store.months = res.data.months
+                    this.store.minLoad = false
+                    this.convertDate()
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            }
         }
     }
 }
@@ -78,13 +187,17 @@ export default {
         <div class="row">
             <div class="col-12">
                 <div class="mb-2 d-flex">
-                    <select class="form-select form-select-sm w-25" aria-label="Small select example">
-                        <option selected>Seleziona mese di riferimento</option>
-                        <option value="1">Novembre</option>
-                        <option value="2">Ottobre</option>
+                    <select v-model="data.month" class="form-select form-select-sm w-25" aria-label="Small select example">
+                        <option value="" selected disabled hidden>
+                            Seleziona mese di riferimento
+                        </option>
+                        <template v-for="month in store.months">
+                            <option :value="month.month_year">{{ month.month_year }}</option>
+                        </template>
                     </select>
+                    <button @click="getAllOld" class="btn btn-outline-dark ms-3">Vai</button>
                     <div>
-                        <router-link  to="/admin/create" class="btn btn-success ms-3">Aggiungi+</router-link>
+                        <router-link  to="/admin/create" class="btn btn-success ms-3">Aggiungi transazione+</router-link>
                     </div>
                 </div>
                 <table class="table table-striped table-white fs-4 border border-5 border-white table-striped-columns table-bordered border-primary">
@@ -106,17 +219,25 @@ export default {
                             <td>{{ row.payment_method.name }}</td>
                             <td>{{ row.expense__categories.name }}</td>
                             <td>
-                                <button class="btn btn-primary">Dettagli</button>
+                                <router-link to="/admin/show" @click="saveId(row.id)" class="btn btn-primary">Dettagli</router-link>
                                 <button class="btn btn-warning mx-2">Modifica</button>
                                 <button @click="deleteTransaction(row.id)" class="btn btn-danger">Elimina</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="d-flex">
+                    <template v-for="page in this.store.transactions.links">
+                        <div v-if="page.url">
+                            <button @click="changePage(page.url)" class="btn btn-outline-primary ms-3">{{ getButtonLabel(page.label) }}</button>
+                        </div>
+                    </template>
+                </div>
             </div>
         </div>
     </div>
 </template>
+
 
 <style lang="scss">
 

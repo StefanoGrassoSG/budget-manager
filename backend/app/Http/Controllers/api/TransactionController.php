@@ -27,11 +27,90 @@ class TransactionController extends Controller
             ->select('transactions.*')
             ->paginate(10);
 
+        $allMonths = Monthly_Budget::select('month_year')
+        ->where('monthly__budgets.user_id', '=', $user['id'])
+        ->get();
+
         if($transactions) {
             return response()->json([
                 'code' => 200,
                 'success' => true,
-                'data' => $transactions
+                'data' => $transactions,
+                'months' => $allMonths
+            ]);
+        }
+        else {
+            return response()->json([
+                'code' => 404,
+                'success' => false,
+            ]);
+        }
+    }
+
+    public function indexOld(Request $request)
+    {      
+        $user = Auth::user();
+        $data = [
+            'month' => $request->input('month')
+        ];
+
+        switch ($data['month']) {
+            case 'Gennaio':
+                $data['month'] = 1;
+                break;
+            case 'Febbraio':
+                $data['month'] = 2;
+                break;
+            case 'Marzo':
+                $data['month'] = 3;
+                break;
+            case 'Aprile':
+                $data['month'] = 4;
+                break;
+            case 'Maggio':
+                $data['month'] = 5;
+                break;
+            case 'Giugno':
+                $data['month'] = 6;
+                break;
+            case 'Luglio':
+                $data['month'] = 7;
+                break;
+            case 'Agosto':
+                $data['month'] = 8;
+                break;
+            case 'Settembre':
+                $data['month'] = 9;
+                break;
+            case 'Ottobre':
+                $data['month'] = 10;
+                break;
+            case 'Novembre':
+                $data['month'] = 11;
+                break;
+            case 'Dicembre':
+                $data['month'] = 12;
+                break;
+        }
+        
+
+        $transactions = Transactions::with('Expense_Categories', 'paymentMethod')
+            ->join('monthly__budgets', 'transactions.monthly_budget_id', '=', 'monthly__budgets.id')
+            ->where('monthly__budgets.month_year', 'LIKE', '%' .  $data['month'] . '%')
+            ->select('transactions.*')
+            ->paginate(10);
+        
+            
+        $allMonths = Monthly_Budget::select('month_year')
+        ->where('monthly__budgets.user_id', '=', $user['id'])
+        ->get();
+
+        if($transactions) {
+            return response()->json([
+                'code' => 200,
+                'success' => true,
+                'data' => $transactions,
+                'months' => $allMonths
             ]);
         }
         else {
@@ -92,9 +171,12 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(Transactions $transaction)
+    {   
+        $transaction->load('Expense_Categories', 'paymentMethod');
+        return response()->json([
+            'data' => $transaction
+        ]);
     }
 
     /**

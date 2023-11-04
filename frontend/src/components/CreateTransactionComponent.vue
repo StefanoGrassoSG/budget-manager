@@ -76,7 +76,7 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
                         <label for="inputState" class="form-label">Metodo di pagamento<span class="text-danger">*</span></label>
                         <select v-model="data.payment" id="inputState" class="form-select">
                             <option value="" selected disabled hidden>Scegli...</option>
-                            <option value="1">Discover Card</option>
+                            <option value="1">PayPal</option>
                             <option value="2">MasterCard</option>
                             <option value="3">Contanti</option>
                             <option value="4">Bancomat</option>

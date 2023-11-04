@@ -3,9 +3,9 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import LoadingComponent from '../components/LoadingComponent.vue';
 import { store } from '../store.js';
-import StatComponent from '../components/StatComponent.vue';
-import TransactionsComponent from '../components/Transactions.component.vue';
+import MiniLoadingComponent from '../components/MiniLoadingComponent.vue';
 import MiniFooterComponent from '../components/MiniFooterComponent.vue';
+import ShowComponent from '../components/ShowComponent.vue';
 
    export default {
     data() {
@@ -18,9 +18,9 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
     },
     components: {
       LoadingComponent,
-      StatComponent,
-      TransactionsComponent,
-      MiniFooterComponent
+      MiniFooterComponent,
+      MiniLoadingComponent,
+      ShowComponent
     },
     methods: {
       checkToken() {
@@ -32,7 +32,6 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
             console.log(response);
             if(response.status === 200) {
               this.store.isAutenticathed = true
-            
             }
             this.store.checkingToken = false
           })
@@ -63,11 +62,11 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
                                 </router-link>
                             </li>
                             <li>
-                              <router-link to="/admin/transactions" class="fs-4 link hover">
+                                <router-link to="/admin/transactions" class="fs-4 link hover">
                                   <span class="messages-asidetext">
                                       Transazioni
                                   </span>
-                              </router-link>                         
+                                </router-link>                         
                             </li>
                              <li> 
                               <div class="fs-4 link">
@@ -81,7 +80,7 @@ import MiniFooterComponent from '../components/MiniFooterComponent.vue';
               </aside>
 
               <div class="content">
-                <StatComponent />
+                <ShowComponent />
               </div>
             </div>
         </main>
@@ -96,8 +95,7 @@ h1 {
 
 .content {
   padding: 20px;
-  padding-bottom: 0;
-  min-height: calc(100vh - 165px);
+  min-height: calc(100vh - 168px);
   width: 100%;
 }
 
