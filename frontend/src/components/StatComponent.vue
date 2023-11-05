@@ -6,6 +6,7 @@ import { store } from '../store.js';
 import ChartComponent from './ChartComponent.vue';
 import MiniLoadingComponent from './MiniLoadingComponent.vue';
 import LineComponent from './LineComponent.vue';
+import BarComponent from './BarComponent.vue';
  
 export default {
     data() {
@@ -19,7 +20,8 @@ export default {
     components: {
         ChartComponent,
         LineComponent,
-        MiniLoadingComponent
+        MiniLoadingComponent,
+        BarComponent
     },
     created() {
         this.resetData();
@@ -42,6 +44,7 @@ export default {
            this.store.expenseCalc = response.data.data.calcs
            this.store.months = response.data.data.months
            this.store.totalForMonth = response.data.data.expensePerMonth
+           this.store.eachdays = response.data.data.eachday
            this.convertDate()
            console.log(this.store.months, 'MESI?')
            console.log(this.store.stats)
@@ -206,7 +209,7 @@ export default {
                     <div class="card-stats border rounded-4">
                         <a href="{{ route('admin.message.index') }}">
                             <div class="count-text-one">
-                                 Percentuali sulle categorie
+                                 Percentuali sulle categorie mese
                             </div>
                             <div class="count-number-card h-100">
                                 <div class="chart-container" v-if="store.categories.length > 0">
@@ -223,6 +226,26 @@ export default {
                     </div>
                 </div>
                 <div class="col-6">
+                    <div class="card-stats border rounded-4">
+                        <a href="{{ route('admin.message.index') }}">
+                            <div class="count-text-one">
+                                Grafico andamento transazioni giornaliero
+                            </div>
+                            <div class="count-number-card h-100">
+                                <div class="chart-container" v-if="store.months.length > 0">
+                                    <BarComponent />
+                                </div>
+                                <div class="count-number-card" v-else-if="store.expenseCalc.length == 0 && store.minLoad == false">
+                                     Non hai spese
+                                </div>
+                                <div class="chart-container" v-if="store.minLoad">
+                                    <MiniLoadingComponent />
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12">
                     <div class="card-stats border rounded-4">
                         <a href="{{ route('admin.message.index') }}">
                             <div class="count-text-one">

@@ -35,8 +35,17 @@ class AdminController extends Controller
         ->where('monthly__budgets.user_id', '=', $user['id'])
         ->where('monthly__budgets.month_year', '=', $meseCorrente)
         ->select('transactions.*')
-        ->sum('amount');    
-
+        ->sum('amount');   
+        
+        $totalExpenseEachDay = DB::table('transactions')
+        ->join('monthly__budgets', 'transactions.monthly_budget_id', '=', 'monthly__budgets.id')
+        ->where('monthly__budgets.user_id', '=', $user['id'])
+        ->where('monthly__budgets.month_year', '=', $meseCorrente)
+        ->select('transactions.date', DB::raw('SUM(transactions.amount) as total_amount'))
+        ->groupBy('transactions.date')
+        ->get();    
+       
+   
         $remainingBudget = $monthIncome->monthly_income - $totalExpense;
 
 
@@ -90,7 +99,8 @@ class AdminController extends Controller
                     'remaining' => $remainingBudget,
                     'calcs' => $percentualiSpesaPerCategoria,
                     'months' => $allMonths,
-                    'expensePerMonth' => $allExpenseMonths
+                    'expensePerMonth' => $allExpenseMonths,
+                    'eachday' => $totalExpenseEachDay
                 ],
             ]);
         }

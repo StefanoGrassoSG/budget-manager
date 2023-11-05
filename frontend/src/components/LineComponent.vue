@@ -7,8 +7,10 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 } from 'chart.js'
+import 'chartjs-plugin-annotation';
 import { store } from '../store.js';
 import { Line } from 'vue-chartjs'
 
@@ -20,7 +22,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 )
 
 export default {
@@ -35,8 +38,10 @@ export default {
         datasets: [
         {
           label: 'Spese',
-          backgroundColor: 'darkblue',
-          data: []
+          backgroundColor: 'rgba(0, 128, 255, 0.5)',
+          data: [],
+          borderColor: 'aqua',
+          fill: 'start'
         }
         ]
       },
