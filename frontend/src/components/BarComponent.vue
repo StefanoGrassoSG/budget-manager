@@ -47,6 +47,9 @@
         this.data.labels = this.getDaysInMonth()
         this.data.datasets[0].data = this.amountEachDay()
         console.log(this.data.datasets[0].data, 'BAR DATA')
+        console.log(this.data.labels, 'DATI BAR MESI')
+        console.log(this.getDaysInMonth(), 'FUNZIONE GETDAYS')
+        console.log(this.store.eachdays,'STORE DAYS')
     },
     methods: {
         getDaysInMonth() {
@@ -60,17 +63,30 @@
 
             const days = [];
             for (let day = 1; day <= numberOfDays; day++) {
-                days.push(day);
+                if(day < 10) {
+                  days.push(`${0}${day}`);
+                }
+                else{
+                  days.push(day);
+                }
             }
 
             return days;
         },
         amountEachDay() {
-            const amounts = [];
-            this.store.eachdays.forEach(element => {
-                amounts.push(element.total_amount)
-            });
-            return amounts
+          const objects = this.store.eachdays;
+          const amounts = Array(this.getDaysInMonth().fill(0));
+          
+          for (const obj of objects) {
+          const date = obj.date; 
+          const dateParts = date.split('-'); 
+          const dayIndex = parseInt(dateParts[2]) - 1; 
+          
+          amounts[dayIndex] = obj.total_amount;
+        }
+              
+           
+          return amounts
         }
     }
   }

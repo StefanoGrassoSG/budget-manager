@@ -22,5 +22,6 @@ export const store = reactive({
     errorsCreate: {},
     singleId: null,
     single: {},
-    path: ''
+    path: '',
+    eachdays: []
 })

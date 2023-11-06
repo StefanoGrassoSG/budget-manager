@@ -221,6 +221,14 @@ class AdminController extends Controller
         $allExpenseMonths = Monthly_Budget::select('total_expenses')
         ->where('monthly__budgets.user_id', '=', $user['id'])
         ->get();
+
+        $totalExpenseEachDay = DB::table('transactions')
+        ->join('monthly__budgets', 'transactions.monthly_budget_id', '=', 'monthly__budgets.id')
+        ->where('monthly__budgets.user_id', '=', $user['id'])
+        ->where('monthly__budgets.month_year','LIKE', '%' .  $data['month'] . '%')
+        ->select('transactions.date', DB::raw('SUM(transactions.amount) as total_amount'))
+        ->groupBy('transactions.date')
+        ->get();    
       
         if($monthIncome) {
             return response()->json([
@@ -235,7 +243,8 @@ class AdminController extends Controller
                     'calcs' => $percentualiSpesaPerCategoria,
                     'months' => $allMonths,
                     'expensePerMonth' => $allExpenseMonths,
-                    'month' => $data
+                    'month' => $data,
+                    'eachday' => $totalExpenseEachDay
                 ],
             ]);
         }

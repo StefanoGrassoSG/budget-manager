@@ -98,8 +98,10 @@ export default {
            this.store.expenseCalc = response.data.data.calcs
            this.store.months = response.data.data.months
            this.store.totalForMonth = response.data.data.expensePerMonth
+           this.store.eachdays = response.data.data.eachday
            this.convertDate()
            console.log(this.store.months, 'OLD MESI?')
+           console.log(this.store.eachdays, 'OLD EACH DAYS')
            console.log(this.store.stats)
            console.log(this.store.first, 'OLD piu alta')
            console.log(this.store.categories)
